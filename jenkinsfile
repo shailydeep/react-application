@@ -1,0 +1,37 @@
+
+pipeline {
+  agent any
+//   environment {
+//         // Define the environment variable to store the GitHub credentials ID.
+//         GITHUB_CREDENTIALS = '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'
+//     }
+  stages {
+    stage('Source Code Clone') {
+      steps {
+          git 'https://github.com/shailydeep/react-application.git'
+        // Install dependencies and build the React application
+        // sh 'npm install'
+        // sh 'npm run build'
+      }
+    }
+    stage('Package install')
+    {
+        steps {
+            sh 'sudo npm install '
+            
+            }
+        }
+    stage('build')
+    {
+        steps {
+            sh 'sudo npm run build'
+        }
+    }
+    stage('start')
+    {
+        steps {
+            sh 'sudo npm start --port 3000 '
+        }
+    }
+    }
+}
